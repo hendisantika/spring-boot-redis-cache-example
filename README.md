@@ -22,3 +22,25 @@ Setup caching annotations. To enable caching, we need to do three things.
    @SpringBootApplication)
 2. Add @Cacheable annotation to the methods for which you need to enable caching.
 3. Optionally, Add an @CacheEvict annotation when you need to clear the cached object.
+
+## Redis in Action
+
+Once we start the application, we can see that the first request to http://localhost:8080/items/2 returns response from
+the database, and a cache entry is made in redis server. We know this because,
+
+```shell
+curl -X PUT \
+http://localhost:8080/items/2 \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+"productName": "Pants Large",
+"price": 14.99
+}'
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sun, 13 Dec 2020 18:11:16 GMT
+
+{"id":2,"productName":"Pants Large","price":14.99} 
+```
