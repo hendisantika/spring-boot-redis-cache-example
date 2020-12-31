@@ -22,7 +22,7 @@ import java.util.List;
  * Time: 11.41
  */
 @RestController
-@RequestMapping(path = "/api/items/")
+@RequestMapping(path = "/api/items")
 public class ItemController {
 
     private final ItemService itemService;

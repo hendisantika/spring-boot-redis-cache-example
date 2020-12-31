@@ -28,6 +28,28 @@ Setup caching annotations. To enable caching, we need to do three things.
 Once we start the application, we can see that the first request to http://localhost:8080/items/2 returns response from
 the database, and a cache entry is made in redis server. We know this because,
 
+Add New Item:
+
+```shell
+curl --location --request POST 'http://localhost:8080/api/items' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "productName": "Pulpen Pilot Motor",
+    "price": 19.99
+}' | jq .
+```
+
+Get All Items
+
+```shell
+curl --location --request GET 'http://localhost:8080/api/items' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "productName": "Pulpen Pilot",
+    "price": 19.99
+}' | jq .
+```
+
 ```shell
 curl -X PUT \
 http://localhost:8080/items/2 \
