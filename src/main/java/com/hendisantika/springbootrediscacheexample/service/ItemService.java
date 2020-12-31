@@ -1,8 +1,11 @@
 package com.hendisantika.springbootrediscacheexample.service;
 
+import com.hendisantika.springbootrediscacheexample.entity.Item;
 import com.hendisantika.springbootrediscacheexample.repository.ItemRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,5 +23,9 @@ public class ItemService {
 
     public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
+    }
+
+    public List<Item> items() {
+        return itemRepository.findAll();
     }
 }
