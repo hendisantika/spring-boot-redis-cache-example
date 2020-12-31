@@ -44,3 +44,20 @@ Date: Sun, 13 Dec 2020 18:11:16 GMT
 
 {"id":2,"productName":"Pants Large","price":14.99} 
 ```
+
+## Timeout for cached values
+
+One more difference between redis and inmemory cache is that, Redis can evict cached entries based on time-to-live(TTL).
+In order to enable this feature you need to add the following parameter to your application.properties.
+
+```shell
+spring.cache.redis.time-to-live=5m
+```
+
+The above configuration will automatically evict any cached entry after 5 minutes.
+
+## What we have learned?
+
+Redis can help provide robust cache store with minimal change to your project. Redis acts as a central cache for all of
+your instances thus there is no cache poisoning (inconsistent cache values between different servers). A new tool called
+redis-commander for exploring the content of redis cache store and how to set it up.
