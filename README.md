@@ -61,3 +61,20 @@ The above configuration will automatically evict any cached entry after 5 minute
 Redis can help provide robust cache store with minimal change to your project. Redis acts as a central cache for all of
 your instances thus there is no cache poisoning (inconsistent cache values between different servers). A new tool called
 redis-commander for exploring the content of redis cache store and how to set it up.
+
+## Things to consider
+
+1. Cacheable objects must be Serializable. The reason is due to how redis stores java objects. The safest way to store
+   objects outside JVM is to write them into serialized bytes. To do that, those classes must implement Serializable.
+2. Try not to cache large objects. Even though redis server is separate from application server, large objects in the
+   cache will cause performance issues.
+3. Make sure all applications using the same cache are at the same version. Cached objects created by application with
+   the version A may not be compatible to the applications with the version B. These type of situations will yield
+   unpredictable results which are not good for business.
+4. Application restarts don’t affect cache stored in redis.
+
+Unlike in-memory caching, redis data store is outside of application JVM. This means that the cached data is available
+even after the restart of an application.
+
+Finally, Redis is one of the many officially supported cache solution by Spring Boot. Try the rest and chose the one
+that fits best for you.
