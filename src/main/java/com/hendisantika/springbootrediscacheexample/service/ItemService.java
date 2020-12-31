@@ -3,6 +3,7 @@ package com.hendisantika.springbootrediscacheexample.service;
 import com.hendisantika.springbootrediscacheexample.entity.Item;
 import com.hendisantika.springbootrediscacheexample.repository.ItemRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,14 @@ public class ItemService {
     }
 
     public Item createItem(Item item) {
+        return itemRepository.save(item);
+    }
+
+    @CacheEvict(value = "items", key = "#id")
+    public Item updateItem(Integer id, Item request) {
+        Item item = getItem(id);
+        item.setPrice(request.getPrice());
+        item.setProductName(request.getProductName());
         return itemRepository.save(item);
     }
 }
