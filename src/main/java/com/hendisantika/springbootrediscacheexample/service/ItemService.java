@@ -36,4 +36,8 @@ public class ItemService {
         log.info("Loading data from DB {}", item);
         return item;
     }
+
+    public Item createItem(Item item) {
+        return itemRepository.save(item);
+    }
 }
